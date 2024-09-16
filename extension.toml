@@ -1,0 +1,17 @@
+id = "defdo-themes"
+name = "Defdo Themes"
+version = "0.0.1"
+schema_version = 1
+authors = ["Roberto Estrada <dev@paridin.com>"]
+description = """
+Defdo Themes brings a curated collection of color schemes to Zed, replicating our popular themes from other platforms. Experience familiar and eye-catching designs that enhance your coding environment and boost productivity.
+
+Features:
+- Multiple theme options to suit different preferences and coding scenarios
+- Carefully crafted color palettes for optimal readability and reduced eye strain
+- Seamless integration with Zed's interface for a cohesive look
+- Regular updates to ensure compatibility and introduce new themes
+
+Elevate your coding experience with Defdo Themes – where functionality meets aesthetics.
+"""
+repository = "https://github.com/defdo-dev/defdo-themes"
