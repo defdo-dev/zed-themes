@@ -125,6 +125,7 @@
         "unreachable.background": null,
         "unreachable.border": null,
         "warning.border": "#f9bc02",
+        "drop_target.background": "#AFA6F60F",
         "players": [
           {
             "background": "#afa6f622",
