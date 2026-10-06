@@ -1,6 +1,6 @@
 id = "defdo-themes"
 name = "Defdo Themes"
-version = "0.0.1"
+version = "0.0.2"
 schema_version = 1
 authors = ["Roberto Estrada <dev@paridin.com>"]
 description = """
@@ -14,4 +14,4 @@ Features:
 
 Elevate your coding experience with Defdo Themes – where functionality meets aesthetics.
 """
-repository = "https://github.com/defdo-dev/defdo-themes"
+repository = "https://github.com/defdo-dev/zed-themes"
