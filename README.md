@@ -15,6 +15,9 @@ Defdo color schemes for the [Zed](https://zed.dev) editor — same palette famil
 | `themes/defdo_solid_gray.json` | `defdo solid gray` | `#303841` | cyan |
 | `themes/defdo_shadow.json` | `defdo shadow` | `#191a19` | cyan |
 | `themes/defdo_yellow.json` | `defdo yellow` | `#0f0f0a` | yellow `#f9bc02` |
+| `themes/defdo_latte.json` | `defdo latte` | `#f7f2e9` | cyan `#0e9bc0` (light) |
+| `themes/defdo_pro.json` | `defdo pro` | `#0e1420` | cyan `#29d3f5` (premium) |
+| `themes/defdo_legend.json` | `defdo legend` | `#131c21` | gold `#ffc94f` (premium) |
 
 All themes share one ANSI palette; only background and accent derive per variant.
 
@@ -35,7 +38,7 @@ Then pick the theme in `settings.json`:
 
 ## Regenerating themes
 
-`defdo base/dark/gray/solid gray/shadow/yellow` are generated from the shared palette:
+`defdo base/dark/gray/solid gray/shadow/yellow/latte/pro/legend` are generated from the shared palette:
 
 ```
 python3 tools/gen_zed_themes.py

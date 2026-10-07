@@ -22,6 +22,8 @@ def fmt(rgb):
 
 def lighten(h, amt, toward=(238, 255, 255)):
     a = parse(h)
+    if isinstance(toward, str):
+        toward = parse(toward)
     return fmt(tuple(x + (y - x) * amt for x, y in zip(a, toward)))
 
 def with_alpha(h, alpha):
@@ -44,7 +46,18 @@ THEME_BG = {
     "shadow":      {"bg": "#191a19", "a": ANSI},
     "halloween":   {"bg": "#140021", "a": ANSI},
     "yellow":      {"bg": "#0f0f0a", "a": ANSI},
+    # Premium tier (palette.json in defdo-iterm2-themes is the source of truth)
+    "latte":       {"bg": "#f7f2e9", "a": {
+        0: "#3a3a3a", 1: "#b33a3a", 2: "#0a7a4f", 3: "#9c7a02",
+        4: "#0055b8", 5: "#6a3d8f", 6: "#0b7a94", 7: "#4a4a4a",
+        8: "#8a8a8a", 9: "#d04545", 10: "#0e9c66", 11: "#c9a800",
+        12: "#2b6fd0", 13: "#8b57b8", 14: "#1194b0", 15: "#16181d"}},
+    "pro":         {"bg": "#0e1420", "a": ANSI},
+    "legend":      {"bg": "#131c21", "a": ANSI},
 }
+LIGHT = {"latte"}
+ACCENTS = {"halloween": "#afa6f6", "yellow": "#f9bc02",
+           "latte": "#0e9bc0", "pro": "#29d3f5", "legend": "#ffc94f"}
 
 def build(slug, info):
     bg, a = info["bg"], info["a"]
@@ -56,18 +69,19 @@ def build(slug, info):
         accent, accent_bright, text_muted = a[6], lighten(a[6], 0.45), lighten(a[6], 0.55)
     surface = bg + "FF"
     panel_border = lighten(bg, BG_LIGHTEN)
+    L = slug in LIGHT
     syntax = {
-        "attribute": accent_bright, "boolean": "#F78C6C", "comment": "#546E7A",
-        "comment.doc": "#546E7A", "constant": "#F78C6C", "constructor": "#f07178",
-        "emphasis": "#f07178", "emphasis.strong": "#f07178", "function": "#0291F7",
-        "keyword": "#BFA6F1", "label": a[3], "link_text": "#f07178",
-        "link_uri": "#f07178", "number": "#F78C6C", "punctuation": "#89C6DF",
-        "punctuation.bracket": "#89C6DF", "punctuation.delimiter": "#89C6DF",
-        "punctuation.list_marker": "#89C6DF", "punctuation.special": "#89C6DF",
-        "string": "#A6C27B", "string.escape": "#F78C6C", "string.regex": "#A6C27B",
-        "string.special": "#A6C27B", "string.special.symbol": "#A6C27B",
-        "tag": "#f07178", "text.literal": "#A6C27B", "title": a[3], "type": a[3],
-        "variable": "#EEFFFF", "variable.special": "#FD4D6A",
+        "attribute": accent_bright, "boolean": ("#b3541e" if L else "#F78C6C"), "comment": ("#6b7a80" if L else "#546E7A"),
+        "comment.doc": ("#6b7a80" if L else "#546E7A"), "constant": ("#b3541e" if L else "#F78C6C"), "constructor": ("#d3405a" if L else "#f07178"),
+        "emphasis": ("#d3405a" if L else "#f07178"), "emphasis.strong": ("#d3405a" if L else "#f07178"), "function": ("#0055b8" if L else "#0291F7"),
+        "keyword": ("#7a4fd0" if L else "#BFA6F1"), "label": a[3], "link_text": ("#d3405a" if L else "#f07178"),
+        "link_uri": ("#d3405a" if L else "#f07178"), "number": ("#b3541e" if L else "#F78C6C"), "punctuation": ("#3e7e9b" if L else "#89C6DF"),
+        "punctuation.bracket": ("#3e7e9b" if L else "#89C6DF"), "punctuation.delimiter": ("#3e7e9b" if L else "#89C6DF"),
+        "punctuation.list_marker": ("#3e7e9b" if L else "#89C6DF"), "punctuation.special": ("#3e7e9b" if L else "#89C6DF"),
+        "string": ("#0a7a4f" if L else "#A6C27B"), "string.escape": ("#b3541e" if L else "#F78C6C"), "string.regex": ("#0a7a4f" if L else "#A6C27B"),
+        "string.special": ("#0a7a4f" if L else "#A6C27B"), "string.special.symbol": ("#0a7a4f" if L else "#A6C27B"),
+        "tag": ("#d3405a" if L else "#f07178"), "text.literal": ("#0a7a4f" if L else "#A6C27B"), "title": a[3], "type": a[3],
+        "variable": ("#16181d" if L else "#EEFFFF"), "variable.special": ("#c62828" if L else "#FD4D6A"),
     }
 
     def syn(color, italic=None, weight=None):
@@ -94,7 +108,7 @@ def build(slug, info):
         "ghost_element.active": with_alpha(accent, "50"),
         "ghost_element.selected": with_alpha(accent, "25"),
         "ghost_element.disabled": "#ff5555ff",
-        "text": "#F9F9F9FF",
+        "text": ("#16181dFF" if slug in LIGHT else "#F9F9F9FF"),
         "text.muted": text_muted,
         "text.placeholder": with_alpha(accent, "FF"),
         "text.disabled": with_alpha(accent_bright, "50"),
@@ -113,11 +127,11 @@ def build(slug, info):
         "info.background": "#00000071",
         "success": a[2],
         "success.background": "#27403B",
-        "cursor_color": "#ffffff",
+        "cursor_color": ("#16181d" if slug in LIGHT else "#ffffff"),
         "editor.background": bg,
         "editor.gutter.background": surface,
         "editor.subheader.background": None,
-        "editor.foreground": "#eeffff",
+        "editor.foreground": ("#16181d" if slug in LIGHT else "#eeffff"),
         "editor.line_number": with_alpha(accent, "85"),
         "editor.active_line_number": accent,
         "editor.invisible": "#65737E",
@@ -126,10 +140,10 @@ def build(slug, info):
         "editor.document_highlight.read_background": with_alpha(accent, "1E"),
         "editor.document_highlight.write_background": with_alpha(accent, "52"),
         "terminal.background": bg,
-        "terminal.foreground": "#eeffff",
-        "terminal.bright_foreground": "#ffffff",
+        "terminal.foreground": ("#16181d" if slug in LIGHT else "#eeffff"),
+        "terminal.bright_foreground": ("#16181d" if slug in LIGHT else "#ffffff"),
         "terminal.dim_foreground": a[8],
-        "terminal.ansi.black": "#5C5C5CFF",
+        "terminal.ansi.black": (a[0] + "FF") if slug in LIGHT else "#5C5C5CFF",
         "terminal.ansi.bright_black": a[8],
         "terminal.ansi.red": a[1], "terminal.ansi.bright_red": a[9],
         "terminal.ansi.green": a[2], "terminal.ansi.bright_green": a[10],
@@ -182,7 +196,7 @@ def build(slug, info):
         "name": f"Defdo {slug.title()}",
         "author": "dev@paridin.com",
         "themes": [{"name": f"defdo {slug.replace('solid-gray', 'solid gray')}",
-                    "appearance": "dark", "style": style}],
+                    "appearance": "light" if slug in LIGHT else "dark", "style": style}],
     }
 
 os.makedirs("themes", exist_ok=True)
