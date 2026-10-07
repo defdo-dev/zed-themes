@@ -46,18 +46,9 @@ THEME_BG = {
     "shadow":      {"bg": "#191a19", "a": ANSI},
     "halloween":   {"bg": "#140021", "a": ANSI},
     "yellow":      {"bg": "#0f0f0a", "a": ANSI},
-    # Premium tier (palette.json in defdo-iterm2-themes is the source of truth)
-    "latte":       {"bg": "#f7f2e9", "a": {
-        0: "#3a3a3a", 1: "#b33a3a", 2: "#0a7a4f", 3: "#9c7a02",
-        4: "#0055b8", 5: "#6a3d8f", 6: "#0b7a94", 7: "#4a4a4a",
-        8: "#8a8a8a", 9: "#d04545", 10: "#0e9c66", 11: "#c9a800",
-        12: "#2b6fd0", 13: "#8b57b8", 14: "#1194b0", 15: "#16181d"}},
-    "pro":         {"bg": "#0e1420", "a": ANSI},
-    "legend":      {"bg": "#131c21", "a": ANSI},
 }
 LIGHT = {"latte"}
-ACCENTS = {"halloween": "#afa6f6", "yellow": "#f9bc02",
-           "latte": "#0e9bc0", "pro": "#29d3f5", "legend": "#ffc94f"}
+ACCENTS = {"halloween": "#afa6f6", "yellow": "#f9bc02"}
 
 def build(slug, info):
     bg, a = info["bg"], info["a"]
