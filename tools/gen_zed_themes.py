@@ -43,13 +43,17 @@ THEME_BG = {
     "solid-gray":  {"bg": "#303841", "a": ANSI},
     "shadow":      {"bg": "#191a19", "a": ANSI},
     "halloween":   {"bg": "#140021", "a": ANSI},
+    "yellow":      {"bg": "#0f0f0a", "a": ANSI},
 }
 
 def build(slug, info):
     bg, a = info["bg"], info["a"]
-    accent = a[6] if slug != "halloween" else "#afa6f6"
-    accent_bright = "#C7A1FF" if slug == "halloween" else lighten(accent, 0.45)
-    text_muted = "#E0C4FF" if slug == "halloween" else lighten(accent, 0.55)
+    if slug == "halloween":
+        accent, accent_bright, text_muted = "#afa6f6", "#C7A1FF", "#E0C4FF"
+    elif slug == "yellow":
+        accent, accent_bright, text_muted = "#f9bc02", "#F9E802", "#FBD98A"
+    else:
+        accent, accent_bright, text_muted = a[6], lighten(a[6], 0.45), lighten(a[6], 0.55)
     surface = bg + "FF"
     panel_border = lighten(bg, BG_LIGHTEN)
     syntax = {
